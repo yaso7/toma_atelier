@@ -35,6 +35,24 @@ export const ig = {
   wheel: "/toma/ig-6.jpg", // working at the wheel in a Toma apron
   shelves: "/toma/ig-7.jpg", // the studio, wheel and glaze shelves
   table: "/toma/ig-8.jpg", // shared painting table
+  group: "/toma/group-table.jpg", // group shaping clay at the shared table (supplied by the studio)
+  painting: "/toma/painting-bird.jpg", // painting a bird silhouette on a clay disc (supplied by the studio)
+  handBuilding: "/toma/hand-building.jpg", // shaping a clay bowl by hand (supplied by the studio)
+  trio: "/toma/trio-pieces.jpg", // three guests holding up their hand-built pieces (supplied by the studio)
+  wave: "/toma/wave-clay-tray.jpg", // guest in a Toma apron holding a clay tray, waving (supplied by the studio)
+  wall: "/toma/photo-wall.jpg", // wall of printed guest photos at the studio (supplied by the studio)
+  mirror: "/toma/mirror-wall.jpg", // porcelain-bordered round mirror on jute rope (supplied by the studio)
+  fishPlate: "/toma/fish-plate.jpg", // linocut fish plate mended with brass clips (supplied by the studio)
+  wallPlate: "/toma/wall-plate.jpg", // hand-painted interior plate under a spotlight (supplied by the studio)
+  framedTile: "/toma/framed-tile.jpg", // framed hand-painted portrait tile (supplied by the studio)
+  corner: "/toma/studio-corner.jpg", // hanging aprons, painted door and round table with roses (supplied by the studio)
+  room: "/toma/studio-room.jpg", // studio room with beams, shelves and workshop tables (supplied by the studio)
+  dishCheckered: "/toma/dish-checkered.jpg", // hand-built two-part dish painted black and white with flower faces (supplied by the studio)
+  dishLetsCook: "/toma/dish-lets-cook.jpg", // teal dish painted with a "Let's cook" pot (supplied by the studio)
+  dishFloral: "/toma/dish-floral.jpg", // teal dish with painted dotted flowers (supplied by the studio)
+  dishOlive: "/toma/dish-olive-you.jpg", // yellow dish painted "Olive you" (supplied by the studio)
+  focus: "/toma/painting-focus.jpg", // guest concentrating on painting a cup on a turntable (supplied by the studio)
+  sign: "/toma/activities-sign.jpg", // hand-made tile sign listing the studio activities, at Error Cafe (supplied by the studio)
 } as const;
 
 /** Stand-ins used where the studio has not shared a photo of the piece. */
@@ -76,6 +94,70 @@ export type Product = {
 };
 
 export const products: Product[] = [
+  {
+    slug: "painted-porcelain-mirror",
+    name: "Painted Porcelain Mirror",
+    price: 38,
+    discount: 0,
+    category: "Home",
+    collection: "wall-pieces",
+    tags: ["recent", "handmade"],
+    image: ig.mirror,
+    gallery: [ig.mirror],
+    description:
+      "A small round mirror set in a hand-painted porcelain border of studio scenes, a radio, a chair, a cat, framed by a clay base and a coil of jute rope.",
+    material: "Hand-built clay with a porcelain border",
+    finish: "Underglaze illustration, glossy glaze, natural jute rope",
+    note: "Hangs from a rope loop, ready for the wall.",
+  },
+  {
+    slug: "linocut-fish-plate",
+    name: "Linocut Fish Plate",
+    price: 30,
+    discount: 0,
+    category: "Home",
+    collection: "wall-pieces",
+    tags: ["recent", "handmade"],
+    image: ig.fishPlate,
+    gallery: [ig.fishPlate],
+    description:
+      "A bold fish carved as a linocut and printed in dark ink onto a hand-built plate, joined with brass clips and made to hang.",
+    material: "Hand-built clay",
+    finish: "Linocut ink print, glossy glaze, brass fittings",
+    note: "The mended cracks are part of the story.",
+  },
+  {
+    slug: "studio-interior-wall-plate",
+    name: "Studio Interior Wall Plate",
+    price: 26,
+    discount: 0,
+    category: "Home",
+    collection: "wall-pieces",
+    tags: ["recent", "handmade"],
+    image: ig.wallPlate,
+    gallery: [ig.wallPlate],
+    description:
+      "A hand-painted plate showing a quiet interior, a figure at a table in soft grey-blue washes with touches of yellow.",
+    material: "Hand-built clay",
+    finish: "Freehand underglaze illustration, glossy glaze",
+    note: "Painted freehand, one of a kind.",
+  },
+  {
+    slug: "framed-portrait-tile",
+    name: "Framed Portrait Tile",
+    price: 24,
+    discount: 0,
+    category: "Home",
+    collection: "wall-pieces",
+    tags: ["recent", "handmade"],
+    image: ig.framedTile,
+    gallery: [ig.framedTile],
+    description:
+      "A tall ceramic tile painted with a figure and a glass of red wine, set in a dark wooden frame and signed Toma.",
+    material: "Hand-painted ceramic tile in a wooden frame",
+    finish: "Underglaze watercolour-style painting, glossy glaze",
+    note: "Signed by the studio.",
+  },
   {
     slug: "strawberry-cat-mug",
     name: "Strawberry Cat Mug",
@@ -248,6 +330,14 @@ export type Collection = {
 };
 
 export const collections: Collection[] = [
+  {
+    slug: "wall-pieces",
+    name: "Wall Pieces",
+    tagline: "Painted plates, mirrors and tiles",
+    description:
+      "Hand-painted and linocut pieces made to hang: illustrated plates, a porcelain-bordered mirror and framed tiles.",
+    image: ig.mirror,
+  },
   {
     slug: "strawberry-cat",
     name: "Strawberry Cat",

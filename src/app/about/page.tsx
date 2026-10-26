@@ -6,10 +6,10 @@ import { brand, ig, img, pillars, stock, venues, workshops } from "@/lib/data";
 export const metadata: Metadata = { title: "Our Story" };
 
 const steps = [
-  { n: "01", title: "Shape", text: "Pinch, coil or slab-build raw organic clay without the rigidity of a wheel.", image: ig.wheel },
-  { n: "02", title: "Texture", text: "Stamp, carve or press real leaves into the soft clay before the first firing.", image: stock.driedFlora },
-  { n: "03", title: "Paint & glaze", text: "Freehand illustrations in premium underglaze, then a glossy glaze.", image: ig.damascus },
-  { n: "04", title: "Kiln & collect", text: `The studio fires your pieces. Pickup is ready ${brand.kilnDays} after the workshop.`, image: ig.kiln },
+  { n: "01", title: "Shape", text: "Pinch, coil or slab-build raw organic clay without the rigidity of a wheel.", image: ig.dishCheckered },
+  { n: "02", title: "Texture", text: "Stamp, carve or press real leaves into the soft clay before the first firing.", image: ig.dishLetsCook },
+  { n: "03", title: "Paint & glaze", text: "Freehand illustrations in premium underglaze, then a glossy glaze.", image: ig.dishFloral },
+  { n: "04", title: "Kiln & collect", text: `The studio fires your pieces. Pickup is ready ${brand.kilnDays} after the workshop.`, image: ig.dishOlive },
 ];
 
 const tracks = [
@@ -47,10 +47,10 @@ export default function AboutPage() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="relative min-h-72 overflow-hidden rounded-sm">
-            <Image src={ig.shelves} alt="The studio shelves and wheel" fill sizes="25vw" className="object-cover" />
+            <Image src={ig.corner} alt="Aprons hanging by a painted door and a round table with red roses" fill sizes="25vw" className="object-cover" />
           </div>
           <div className="relative min-h-72 overflow-hidden rounded-sm">
-            <Image src={ig.smile} alt="A guest in a Toma apron" fill sizes="25vw" className="object-cover object-top" />
+            <Image src={ig.room} alt="The studio room with wooden beams, shelves of ceramics and workshop tables" fill sizes="25vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -90,7 +90,7 @@ export default function AboutPage() {
           {steps.map((s) => (
             <li key={s.n} className="overflow-hidden rounded-sm bg-white">
               <div className="relative aspect-[4/3]">
-                <Image src={img(s.image, 600)} alt={s.title} fill sizes="25vw" className="object-cover object-top" />
+                <Image src={img(s.image, 600)} alt={s.title} fill sizes="25vw" className="object-cover" />
               </div>
               <div className="p-5">
                 <p className="text-xs text-clay">{s.n}</p>

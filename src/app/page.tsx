@@ -63,11 +63,11 @@ function Hero() {
             className="flex w-full max-w-xs items-center gap-4 rounded-sm bg-cream p-2 pr-6 text-ink shadow-xl transition-transform hover:-translate-y-1"
           >
             <Image
-              src={ig.wheel}
-              alt="Working at the wheel in a Toma apron"
+              src={ig.sign}
+              alt="The studio's hand-made tile sign listing its activities"
               width={110}
               height={110}
-              className="size-24 rounded-sm object-cover object-top md:size-28"
+              className="size-24 shrink-0 rounded-sm object-cover object-[50%_70%] md:size-28"
             />
             <div>
               <Chip className="text-[9px]">{brand.tagline}</Chip>
@@ -126,12 +126,12 @@ function Intro() {
         </h2>
         <div className="flex gap-3">
           <Link href="/booking" className="relative h-44 w-32 overflow-hidden rounded-sm md:h-52 md:w-36">
-            <Image src={ig.kiln} alt="Opening the kiln" fill sizes="144px" className="object-cover" />
+            <Image src={ig.painting} alt="Painting a bird silhouette on a clay disc" fill sizes="144px" className="object-cover" />
           </Link>
           <Link href="/collections" className="relative h-44 w-32 overflow-hidden rounded-sm md:h-52 md:w-36">
-            <Image src={ig.sea} alt="Pouring slip by the sea" fill sizes="144px" className="object-cover" />
+            <Image src={ig.handBuilding} alt="Shaping a clay bowl by hand" fill sizes="144px" className="object-cover" />
             <span className="absolute bottom-3 left-3 rounded-full bg-white px-3 py-1.5 text-[10px] font-medium">
-              Slow Travel
+              Hand-Building
             </span>
           </Link>
         </div>
@@ -139,8 +139,8 @@ function Intro() {
 
       <Link href="/booking" className="group relative block aspect-[4/5] overflow-hidden rounded-sm lg:aspect-auto">
         <Image
-          src={ig.table}
-          alt="Guests painting ceramics at a shared table"
+          src={ig.group}
+          alt="A group shaping clay together at a shared table"
           fill
           sizes="(min-width: 1024px) 340px, 100vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -156,7 +156,7 @@ function Intro() {
 function LivingWorkshop() {
   const shots = [
     { src: ig.damascus, alt: "Painting night in Damascus" },
-    { src: ig.smile, alt: "Guest in a Toma apron" },
+    { src: ig.trio, alt: "Three guests holding up their hand-built pieces" },
     { src: ig.wheel, alt: "Shaping clay at the wheel" },
     { src: ig.shelves, alt: "The studio wheel and shelves" },
   ];
@@ -209,15 +209,15 @@ function Creativity() {
           </p>
         </div>
         <div className="relative aspect-square overflow-hidden rounded-sm">
-          <Image src={ig.smile} alt="Guest holding up a fresh piece" fill sizes="25vw" className="object-cover object-top" />
+          <Image src={ig.wave} alt="A guest in a Toma apron holding a clay tray and waving" fill sizes="25vw" className="object-cover object-top" />
         </div>
         <div className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-sm md:aspect-[16/9]">
           <Image
-            src={ig.venue}
-            alt="An evening pop-up at a Damascus café"
+            src={ig.wall}
+            alt="A wall of printed photo-booth memories from past workshops"
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover object-[50%_35%]"
+            className="object-cover object-[50%_64%]"
           />
           <Link
             href="/private-events"

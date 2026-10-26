@@ -49,7 +49,7 @@ export default function PrivateEventsPage() {
             </PillLink>
           </div>
           <div className="relative mt-10 aspect-[4/3] overflow-hidden rounded-sm">
-            <Image src={ig.venue} alt="An evening pop-up in a Damascus café" fill sizes="40vw" className="object-cover object-[50%_30%]" />
+            <Image src={ig.focus} alt="A guest concentrating while painting a cup on a turntable" fill sizes="40vw" className="object-cover object-[50%_45%]" />
           </div>
         </div>
         <PrivateEventForm />

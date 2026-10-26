@@ -2,19 +2,22 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Quote } from "lucide-react";
 import { PageHeader, PillLink } from "@/components/site/primitives";
-import { brand, ig } from "@/lib/data";
+import { brand } from "@/lib/data";
 
 export const metadata: Metadata = { title: "From the Studio" };
 
 const frames = [
-  { src: ig.damascus, alt: "A painting night in Damascus", caption: "Painting nights" },
-  { src: ig.kiln, alt: "Opening the kiln to fired cups", caption: "Kiln day" },
-  { src: ig.smile, alt: "A guest in a Toma apron waving", caption: "Aprons on" },
-  { src: ig.wheel, alt: "Shaping clay at the wheel", caption: "At the wheel" },
-  { src: ig.venue, alt: "An evening pop-up with heart balloons", caption: "Pop-up evenings" },
-  { src: ig.shelves, alt: "The studio's wheel and glaze shelves", caption: "The studio" },
-  { src: ig.sea, alt: "Pouring cream slip on a pebble beach", caption: "Slow travel" },
-  { src: ig.table, alt: "A shared painting table", caption: "Shared tables" },
+  { src: "/toma/gallery-01.jpg", w: 1500, h: 2000, alt: "A resident artist guiding a guest through a pattern while she paints, with an iced coffee on the table", caption: "Step-by-step guidance" },
+  { src: "/toma/gallery-02.jpg", w: 1500, h: 2000, alt: "Three friends painting ceramics around a round table", caption: "Painting nights" },
+  { src: "/toma/gallery-03.jpg", w: 1500, h: 2000, alt: "Two friends holding up a blue dish and a pink painted cup next to a cherry cake", caption: "Made with friends" },
+  { src: "/toma/gallery-04.jpg", w: 2000, h: 1711, alt: "Three guests holding up their painted dishes", caption: "Dishes to take home" },
+  { src: "/toma/gallery-05.jpg", w: 2000, h: 2000, alt: "Two members of the team filling in the booking notebook", caption: "The team" },
+  { src: "/toma/gallery-06.jpg", w: 1502, h: 2000, alt: "A family holding up their hand-painted dishes in front of the studio shelves", caption: "Family sessions" },
+  { src: "/toma/gallery-07.jpg", w: 1500, h: 2000, alt: "Hands painting a black disc with silver paint beside a crowded palette", caption: "Paint-covered tables" },
+  { src: "/toma/gallery-08.jpg", w: 1500, h: 2000, alt: "A young maker carving details into a hand-built clay cup", caption: "Young makers" },
+  { src: "/toma/gallery-09.jpg", w: 1500, h: 2000, alt: "A guest holding up a painted canvas while her friend paints a small clay dish at the round table", caption: "Canvas and clay" },
+  { src: "/toma/gallery-10.jpg", w: 1500, h: 2000, alt: "Two friends holding up their painted canvases, a pink sunset and a starry night", caption: "Painted canvases" },
+  { src: "/toma/gallery-11.jpg", w: 1893, h: 2000, alt: "A block-printed cloth hanging on the wall with a seahorse and coral stamped beside it", caption: "Linocut prints" },
 ];
 
 const directions = [
@@ -29,17 +32,17 @@ export default function GalleryPage() {
       <PageHeader
         eyebrow="From the Studio"
         title="Honest, Warm, Unposed"
-        intro="Moments from workshops across Damascus, taken from our Instagram. Always a living workshop, always human hands working clay."
+        intro="Moments from workshops across Damascus. Always a living workshop, always human hands working clay."
       />
 
       <section className="container-page columns-2 gap-3 md:columns-3 lg:columns-4 [&>figure]:mb-3">
-        {frames.map((f, i) => (
+        {frames.map((f) => (
           <figure key={f.src} className="relative overflow-hidden rounded-sm break-inside-avoid">
             <Image
               src={f.src}
               alt={f.alt}
-              width={360}
-              height={i % 3 === 0 ? 560 : 640}
+              width={f.w}
+              height={f.h}
               sizes="(min-width: 1024px) 25vw, 50vw"
               className="h-auto w-full object-cover"
             />

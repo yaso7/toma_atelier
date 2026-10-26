@@ -12,7 +12,7 @@ export default function CollectionsPage() {
     <>
       <PageHeader
         eyebrow="Collections"
-        title="Four Ways to Hold Clay"
+        title="Five Ways to Hold Clay"
         intro="The studio's output has a distinct, rustic look. Browse by style, from strawberry cats to raw earth and pressed flowers."
       />
 

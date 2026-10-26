@@ -41,33 +41,39 @@
   --color-clay-light: var(--clay-light);
   --color-ink: var(--ink);
   --color-espresso: var(--espresso);
+  --color-cobalt: var(--cobalt);
+  --color-ochre: var(--ochre);
+  --font-script: var(--font-caveat);
 }
 
 :root {
-  --cream: #f7eee6;
-  --sand: #efe2d6;
-  --clay: #c0703f;
-  --clay-light: #e2a873;
-  --ink: #1f1915;
-  --espresso: #2b2420;
+  /* Toma l'atelier brand palette */
+  --cream: #fefae0; /* Studio Cream: 60% canvas */
+  --sand: #f5ecc8;
+  --clay: #c86446; /* Terracotta Clay */
+  --clay-light: #dda15e; /* Warm Ochre */
+  --ochre: #dda15e;
+  --cobalt: #1d3557; /* Cobalt Accent: CTAs, links, key contact */
+  --ink: #3a2a22; /* dark brown text, never pure black */
+  --espresso: #2d2019;
 
   --background: var(--cream);
   --foreground: var(--ink);
   --card: #ffffff;
   --card-foreground: var(--ink);
-  --popover: #fffaf6;
+  --popover: #fffdf0;
   --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: #fffaf6;
+  --primary: var(--cobalt);
+  --primary-foreground: #fefae0;
   --secondary: var(--sand);
   --secondary-foreground: var(--ink);
   --muted: var(--sand);
-  --muted-foreground: #7a6a5f;
-  --accent: #f3e3d4;
+  --muted-foreground: #7b6858;
+  --accent: #f7efc9;
   --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e4d4c6;
-  --input: #dccbbd;
+  --border: #eadfb8;
+  --input: #e0d3a4;
   --ring: var(--clay-light);
   --radius: 0.625rem;
 }

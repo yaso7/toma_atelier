@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Caveat, Cormorant_Garamond, Inter } from "next/font/google";
 import { Suspense } from "react";
 import { Toaster } from "sonner";
 import { Navbar } from "@/components/site/navbar";
@@ -17,17 +17,22 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500"],
 });
 
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: {
-    default: "Clayra — Handmade Pottery & Clay Studio",
-    template: "%s · Clayra",
+    default: "Toma l'atelier: A Station of Art in Damascus",
+    template: "%s · Toma l'atelier",
   },
-  description: "Artisan pottery shaped by hand, plus wheel-throwing and hand-building workshops at the Clayra studio.",
+  description: "A community art collective and fine-art incubator in Damascus. Hand-building, porcelain painting and linocut workshops, plus handmade ceramics.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable} ${caveat.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <Suspense>
           <Navbar />
@@ -36,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <Toaster
           position="bottom-right"
-          toastOptions={{ style: { background: "#1f1915", color: "#fff", border: "none", borderRadius: 999 } }}
+          toastOptions={{ style: { background: "#1d3557", color: "#fff", border: "none", borderRadius: 999 } }}
         />
       </body>
     </html>

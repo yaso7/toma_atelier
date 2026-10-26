@@ -44,7 +44,7 @@ export function ProductCard({ product, className }: { product: Product; classNam
             addToCart(product.slug);
             toast(`${product.name} added to your basket`);
           }}
-          className="shrink-0 rounded-full bg-ink px-3.5 py-2 text-[10px] font-semibold text-white transition-colors hover:bg-clay"
+          className="shrink-0 rounded-full bg-cobalt px-3.5 py-2 text-[10px] font-semibold text-white transition-colors hover:bg-clay"
         >
           Buy Now
         </button>

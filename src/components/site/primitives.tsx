@@ -1,15 +1,24 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-/** Small outlined label used above headings ("Art of Pottery"). */
+/** Toma l'atelier wordmark: modern caps with a hand-rendered script tail. */
+export function Logo({ className }: { className?: string }) {
+  return (
+    <span className={cn("inline-flex items-baseline gap-1.5 leading-none", className)}>
+      <span className="text-[1.35rem] font-bold tracking-[0.22em]">TOMA</span>
+      <span className="font-script text-[1.7rem] font-medium">l&apos;atelier</span>
+    </span>
+  );
+}
+
+/** Small outlined label used above headings ("A Station of Art"). */
 export function Chip({ children, className, dark }: { children: React.ReactNode; className?: string; dark?: boolean }) {
   return (
     <span
       className={cn(
         "inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium tracking-wide",
-        dark ? "border-white/40 text-white" : "border-ink/15 bg-white/60 text-ink/80",
+        dark ? "border-white/40 text-white" : "border-clay/40 bg-white/60 text-clay",
         className,
       )}
     >
@@ -24,19 +33,21 @@ type PillProps = {
   variant?: "dark" | "light" | "outline";
   className?: string;
   arrow?: boolean;
+  external?: boolean;
 };
 
-/** Rounded CTA with the circled arrow from the design ("Explore Clay ⟶"). */
-export function PillLink({ href, children, variant = "dark", className, arrow = true }: PillProps) {
+/** Rounded CTA with the circled arrow from the design. Cobalt is reserved for calls to action. */
+export function PillLink({ href, children, variant = "dark", className, arrow = true, external }: PillProps) {
   return (
     <Link
       href={href}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={cn(
         "group inline-flex items-center gap-3 rounded-full py-1.5 pr-1.5 text-sm font-medium transition-colors",
         arrow ? "pl-5" : "px-5 py-2.5",
-        variant === "dark" && "bg-ink text-white hover:bg-ink/85",
+        variant === "dark" && "bg-cobalt text-white hover:bg-cobalt/85",
         variant === "light" && "bg-white text-ink hover:bg-cream",
-        variant === "outline" && "border border-ink/20 text-ink hover:bg-white",
+        variant === "outline" && "border border-cobalt/30 text-cobalt hover:bg-white",
         className,
       )}
     >
@@ -45,44 +56,13 @@ export function PillLink({ href, children, variant = "dark", className, arrow = 
         <span
           className={cn(
             "grid size-7 place-items-center rounded-full transition-transform group-hover:translate-x-0.5",
-            variant === "dark" ? "bg-white text-ink" : "bg-ink text-white",
+            variant === "dark" ? "bg-white text-cobalt" : "bg-cobalt text-white",
           )}
         >
           <ArrowRight className="size-3.5" />
         </span>
       )}
     </Link>
-  );
-}
-
-export function AvatarStack({ srcs, size = 32 }: { srcs: string[]; size?: number }) {
-  return (
-    <div className="flex -space-x-2.5">
-      {srcs.map((src) => (
-        <Image
-          key={src}
-          src={src}
-          alt=""
-          width={size}
-          height={size}
-          className="rounded-full border-2 border-cream object-cover"
-          style={{ width: size, height: size }}
-        />
-      ))}
-    </div>
-  );
-}
-
-export function Stars({ rating, className }: { rating: number; className?: string }) {
-  return (
-    <div className={cn("flex items-center gap-0.5", className)} aria-label={`${rating} out of 5`}>
-      {Array.from({ length: 5 }, (_, i) => (
-        <Star
-          key={i}
-          className={cn("size-3.5", i < Math.round(rating) ? "fill-clay text-clay" : "text-ink/20")}
-        />
-      ))}
-    </div>
   );
 }
 

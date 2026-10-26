@@ -1,8 +1,8 @@
 export const navLinks = [
-  { href: "/shop", label: "All Shop" },
-  { href: "/best-sellers", label: "Best Sellers" },
+  { href: "/shop", label: "Shop" },
   { href: "/collections", label: "Collections" },
   { href: "/booking", label: "Workshops" },
-  { href: "/reviews", label: "Reviews" },
-  { href: "/custom-orders", label: "Custom Orders" },
+  { href: "/about", label: "Our Story" },
+  { href: "/gallery", label: "Gallery" },
+  { href: "/private-events", label: "Private Events" },
 ];

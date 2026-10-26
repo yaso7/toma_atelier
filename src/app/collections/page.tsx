@@ -12,8 +12,8 @@ export default function CollectionsPage() {
     <>
       <PageHeader
         eyebrow="Collections"
-        title="Four Families of Form"
-        intro="Each collection begins with a clay body and a feeling. Browse by mood, then find the piece that belongs on your table or shelf."
+        title="Four Ways to Hold Clay"
+        intro="The studio's output has a distinct, rustic look. Browse by style, from strawberry cats to raw earth and pressed flowers."
       />
 
       <div className="container-page space-y-20 md:space-y-28">
@@ -29,7 +29,7 @@ export default function CollectionsPage() {
               </div>
               <div>
                 <Chip>{c.tagline}</Chip>
-                <h2 className="mt-4 font-display text-5xl md:text-6xl">{c.name}</h2>
+                <h2 className="mt-4 font-display text-5xl text-clay md:text-6xl">{c.name}</h2>
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">{c.description}</p>
 
                 <ul className="mt-8 divide-y divide-ink/10 border-y border-ink/10">
@@ -45,13 +45,13 @@ export default function CollectionsPage() {
                         />
                         <span className="flex-1 font-serif text-xl group-hover:text-clay">{p.name}</span>
                         <span className="text-xs text-muted-foreground">{p.category}</span>
-                        <span className="w-14 text-right text-sm font-semibold">${salePrice(p)}</span>
+                        <span className="w-14 text-right text-sm font-semibold text-cobalt">${salePrice(p)}</span>
                       </Link>
                     </li>
                   ))}
                 </ul>
                 <PillLink href="/shop" className="mt-8">
-                  Shop the collection
+                  See the pieces
                 </PillLink>
               </div>
             </section>

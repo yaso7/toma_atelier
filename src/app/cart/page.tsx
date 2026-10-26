@@ -2,33 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { toast } from "sonner";
-import { Trash2 } from "lucide-react";
+import { MessageCircle, Trash2 } from "lucide-react";
 import { QtyStepper, useCartLines } from "@/components/site/cart-sheet";
 import { Chip, PillLink } from "@/components/site/primitives";
-import { img } from "@/lib/data";
+import { brand, img, whatsapp } from "@/lib/data";
 import { clearCart, setQty } from "@/lib/store";
 
 export default function CartPage() {
   const { items, subtotal } = useCartLines();
-  const [placed, setPlaced] = useState(false);
-  const shipping = subtotal >= 150 || subtotal === 0 ? 0 : 12;
 
-  if (placed) {
-    return (
-      <section className="container-page flex min-h-[70vh] flex-col items-center justify-center pt-28 text-center">
-        <Chip>Order confirmed</Chip>
-        <h1 className="mt-5 font-display text-6xl md:text-7xl">Thank you!</h1>
-        <p className="mt-4 max-w-md text-sm text-muted-foreground">
-          Your pieces are being wrapped by hand. A confirmation email is on its way.
-        </p>
-        <PillLink href="/shop" className="mt-8">
-          Keep browsing
-        </PillLink>
-      </section>
-    );
-  }
+  const sendOrder = () => {
+    const lines = items.map((i) => `${i.qty} × ${i.product.name} ($${i.unit * i.qty})`);
+    const message = [
+      "Hello Toma l'atelier, I'd like to order:",
+      ...lines,
+      `Total: $${subtotal}`,
+      "Please confirm availability and delivery or pickup.",
+    ].join("\n");
+    window.open(whatsapp(message), "_blank", "noopener,noreferrer");
+    toast("Opening WhatsApp so you can send your order");
+  };
 
   return (
     <section className="container-page pt-36">
@@ -39,7 +33,7 @@ export default function CartPage() {
         <div className="py-20">
           <p className="font-serif text-3xl text-muted-foreground">Nothing here yet.</p>
           <PillLink href="/shop" className="mt-6">
-            Explore Clay
+            Browse the shop
           </PillLink>
         </div>
       ) : (
@@ -61,7 +55,7 @@ export default function CartPage() {
                         {product.name}
                       </Link>
                       <p className="text-xs text-muted-foreground">
-                        {product.material} · {product.dimensions}
+                        {product.material} · {product.finish}
                       </p>
                     </div>
                     <p className="text-sm font-semibold">${unit * qty}</p>
@@ -88,28 +82,26 @@ export default function CartPage() {
                 <dd>${subtotal}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-muted-foreground">Shipping</dt>
-                <dd>{shipping ? `$${shipping}` : "Free"}</dd>
+                <dt className="text-muted-foreground">Pickup / delivery</dt>
+                <dd>Arranged on WhatsApp</dd>
               </div>
               <div className="flex justify-between border-t border-ink/10 pt-3 text-base font-semibold">
                 <dt>Total</dt>
-                <dd>${subtotal + shipping}</dd>
+                <dd>${subtotal}</dd>
               </div>
             </dl>
-            {shipping > 0 && (
-              <p className="mt-3 text-[11px] text-clay">Add ${150 - subtotal} more for free shipping.</p>
-            )}
             <button
-              onClick={() => {
-                clearCart();
-                setPlaced(true);
-                toast("Order placed — thank you!");
-              }}
-              className="mt-6 w-full rounded-full bg-ink py-3.5 text-sm font-medium text-white transition-colors hover:bg-clay"
+              onClick={sendOrder}
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-cobalt py-3.5 text-sm font-medium text-white transition-colors hover:bg-cobalt/85"
             >
-              Place order
+              <MessageCircle className="size-4" /> Send order on WhatsApp
             </button>
-            <p className="mt-3 text-center text-[11px] text-muted-foreground">Demo checkout — no payment is taken.</p>
+            <button onClick={clearCart} className="mt-3 w-full text-center text-[11px] text-muted-foreground hover:text-ink">
+              Clear basket
+            </button>
+            <p className="mt-3 text-center text-[11px] text-muted-foreground">
+              No payment is taken on this site. We confirm every order on {brand.bookingPhone}.
+            </p>
           </aside>
         </div>
       )}

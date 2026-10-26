@@ -1,46 +1,68 @@
-// Hard-coded catalogue for the Clayra storefront and studio.
+// Toma l'atelier: content from the brand dossier.
+//
+// NOTE: the dossier does not list prices, capacities or workshop timetables.
+// Those values (price, capacity, schedule) are PLACEHOLDERS for the demo UI
+// and must be replaced with the studio's real numbers. Bookings are confirmed
+// by the studio over WhatsApp / Instagram DM.
 
-export const img = (id: string, w = 1200) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
-
-export const photos = {
-  heroHands: "1609881582722-4a8ab7cd54d8",
-  wheelDark: "1493106641515-6b5631de4bb9",
-  womanWheel: "1764507768733-667e135d8cb9",
-  terracottaWheel: "1609881583302-61548332039c",
-  handsClay: "1621846323386-a60faf26f962",
-  smilingPotter: "1625742579865-8bba525ba5de",
-  focusedPotter: "1598815272841-4e85a77e0a67",
-  pinchingPot: "1590605095243-072811dbe64c",
-  slipHands: "1771523350747-638a89667c8f",
-  centering: "1607556671927-78a6605e290b",
-  trimming: "1753164725860-ffcd260b7b32",
-  carving: "1673339065001-a30d6c343cdd",
-  painting: "1673339065013-f8411fb93848",
-  glazes: "1577576223085-3eb295cd414f",
-  studioWheel: "1676125105332-608345abe20e",
-  potterAtWork: "1760894192884-37a7037200ba",
-  greyPot: "1601135183537-10c09f98902a",
-  tools: "1595351298020-038700609878",
-  handsBw: "1468322638156-074863f9362e",
-  slabWork: "1572725335307-3303414b3360",
-  marketPots: "1749518295706-dc15ca3b5fd5",
-  cupsRow: "1725169412537-acd1cd15e10f",
-  vaseShelf: "1597696929736-6d13bed8e6a8",
+export const brand = {
+  name: "Toma l'atelier",
+  short: "Toma",
+  tagline: "A Station of Art",
+  instagram: "toma._atelier",
+  instagramUrl: "https://www.instagram.com/toma._atelier/",
+  city: "Damascus, Syria",
+  bookingPhone: "+963 994 602 084",
+  altPhone: "+963 967 198 897",
+  kilnDays: "10 to 14 days",
 } as const;
 
-export const avatars = [
-  img("1494790108377-be9c29b29330", 160),
-  img("1568602471122-7832951cc4c5", 160),
-  img("1548382131-e0ebb1f0cdea", 160),
-];
+/** WhatsApp deep link to the official booking line. */
+export const whatsapp = (message: string, phone = "963994602084") =>
+  `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-export type Category = "Vases" | "Bowls" | "Mugs" | "Plates" | "Jars";
+// Remote stand-ins are Unsplash ids; anything starting with "/" is a local file.
+export const img = (id: string, w = 1200) =>
+  id.startsWith("/") ? id : `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+
+/** Photos downloaded from @toma._atelier (public/toma). */
+export const ig = {
+  sea: "/toma/ig-1.jpg", // pouring cream slip on a pebble beach
+  kiln: "/toma/ig-2.jpg", // opening the kiln, fired cups on the shelf
+  venue: "/toma/ig-3.jpg", // evening pop-up with heart balloons
+  damascus: "/toma/ig-4.jpg", // painting night in Damascus
+  smile: "/toma/ig-5.jpg", // guest in a Toma apron, studio shelves
+  wheel: "/toma/ig-6.jpg", // working at the wheel in a Toma apron
+  shelves: "/toma/ig-7.jpg", // the studio, wheel and glaze shelves
+  table: "/toma/ig-8.jpg", // shared painting table
+} as const;
+
+/** Stand-ins used where the studio has not shared a photo of the piece. */
+export const stock = {
+  heroHands: "1609881582722-4a8ab7cd54d8",
+  strawberryMug: "1633738674687-9505aa528801",
+  paintedPlates: "1776841273394-63df4bda8348",
+  colourDishes: "1577576223085-3eb295cd414f",
+  rawEarthMug: "1536936812504-0e77dc3f0b40",
+  rawEarthCups: "1610701596007-11502861dcfa",
+  creamMug: "1590422749897-47036da0b0ff",
+  floraTray: "1732053989556-95d6a5fe31aa",
+  incense: "1520408222757-6f9f95d87d5d",
+  tote: "1574365569389-a10d488ca3fb",
+  linocut: "1744096641619-646e1f6fbcd5",
+  carving: "1730134426941-1def6b725da3",
+  blueSaucers: "1767857527365-62a80ce41083",
+  driedFlora: "1596301538961-fcad89e0e68a",
+} as const;
+
+// ---- Shop ----
+
+export type Category = "Mugs" | "Plates & Dishes" | "Home" | "Totes & Aprons";
 
 export type Product = {
   slug: string;
   name: string;
-  price: number;
+  price: number; // placeholder USD
   discount: number; // percent
   category: Category;
   collection: string;
@@ -49,241 +71,167 @@ export type Product = {
   gallery: string[];
   description: string;
   material: string;
-  dimensions: string;
-  glaze: string;
-  rating: number;
-  reviews: number;
-  stock: number;
+  finish: string;
+  note: string;
 };
 
 export const products: Product[] = [
   {
-    slug: "ancient-vessel",
-    name: "Ancient Vessel",
-    price: 560,
-    discount: 10,
-    category: "Vases",
-    collection: "earthbound",
+    slug: "strawberry-cat-mug",
+    name: "Strawberry Cat Mug",
+    price: 14,
+    discount: 0,
+    category: "Mugs",
+    collection: "strawberry-cat",
+    tags: ["bestseller", "popular", "handmade"],
+    image: stock.strawberryMug,
+    gallery: [stock.strawberryMug, stock.creamMug, ig.table],
+    description:
+      "The studio's fan-favourite: a pre-fired mug hand-painted with the signature cat silhouette and tiny strawberries.",
+    material: "Hand-built clay body",
+    finish: "Hand-painted underglaze, glossy clear glaze",
+    note: "Every mug is painted freehand, so no two strawberries match.",
+  },
+  {
+    slug: "strawberry-cat-plate",
+    name: "Strawberry Cat Plate",
+    price: 18,
+    discount: 0,
+    category: "Plates & Dishes",
+    collection: "strawberry-cat",
+    tags: ["bestseller", "popular"],
+    image: stock.paintedPlates,
+    gallery: [stock.paintedPlates, stock.blueSaucers, ig.damascus],
+    description:
+      "A ready-to-buy plate carrying the hand-carved or glazed cat motif framed by a ring of strawberries.",
+    material: "Hand-built clay body",
+    finish: "Underglaze illustration, glossy glaze",
+    note: "Made for serving small bites, or hanging on the wall.",
+  },
+  {
+    slug: "strawberry-cat-trinket-dish",
+    name: "Strawberry Cat Trinket Dish",
+    price: 9,
+    discount: 0,
+    category: "Plates & Dishes",
+    collection: "strawberry-cat",
+    tags: ["recent", "handmade"],
+    image: stock.colourDishes,
+    gallery: [stock.colourDishes, stock.paintedPlates],
+    description: "A small dish for rings, keys and earrings, finished with the studio cat and a single strawberry.",
+    material: "Hand-built clay body",
+    finish: "Underglaze, glossy glaze",
+    note: "A small gift with a lot of character.",
+  },
+  {
+    slug: "raw-earth-mug",
+    name: "Raw Earth Mug",
+    price: 16,
+    discount: 0,
+    category: "Mugs",
+    collection: "raw-earth",
     tags: ["popular", "handmade", "bestseller"],
-    image: "1618722060945-b87f7326995b",
-    gallery: ["1618722060945-b87f7326995b", "1613424777445-f93a2a48e285", "1729625561980-be4546863105"],
+    image: stock.rawEarthMug,
+    gallery: [stock.rawEarthMug, stock.rawEarthCups, ig.kiln],
     description:
-      "A two-handled amphora thrown in a single session and burnished by hand. Its silhouette borrows from Mediterranean storage jars, softened for a modern shelf.",
-    material: "Red earthenware",
-    dimensions: "H 34cm · Ø 21cm",
-    glaze: "Unglazed, burnished",
-    rating: 4.9,
-    reviews: 128,
-    stock: 6,
+      "An asymmetric mug that leaves the bottom half unglazed to show the textured brown clay, with a glossy cream-dipped top rim and handle.",
+    material: "Raw textured clay",
+    finish: "Unglazed base, cream-dipped rim",
+    note: "Thumbprints and uneven rims are part of the design.",
   },
   {
-    slug: "modern-vase",
-    name: "Modern Vase",
-    price: 871,
-    discount: 10,
-    category: "Vases",
-    collection: "terracotta-modern",
-    tags: ["recent", "popular"],
-    image: "1674390521253-79caf82d0ceb",
-    gallery: ["1674390521253-79caf82d0ceb", "1631125915597-adf46a94e436", "1631125915902-d8abe9225ff2"],
-    description:
-      "Fluted walls carved while leather-hard give this vase a rhythm of light and shadow. A satin terracotta finish keeps it warm and tactile.",
-    material: "Terracotta",
-    dimensions: "H 28cm · Ø 16cm",
-    glaze: "Satin terracotta",
-    rating: 4.8,
-    reviews: 86,
-    stock: 4,
-  },
-  {
-    slug: "retro-vessel",
-    name: "Retro Vessel",
-    price: 675,
-    discount: 10,
-    category: "Jars",
-    collection: "earthbound",
-    tags: ["handmade", "bestseller"],
-    image: "1729625561980-be4546863105",
-    gallery: ["1729625561980-be4546863105", "1771627278991-8922851b9435", "1782351119423-3099437f3739"],
-    description:
-      "A spouted water jug inspired by Iberian botijos. Thrown in two parts and joined, with a loop handle pulled from the same clay body.",
-    material: "Terracotta",
-    dimensions: "H 30cm · Ø 19cm",
-    glaze: "Raw clay interior seal",
-    rating: 4.7,
-    reviews: 64,
-    stock: 9,
-  },
-  {
-    slug: "mathilde",
-    name: "Mathilde",
-    price: 820,
-    discount: 10,
-    category: "Vases",
-    collection: "quiet-forms",
-    tags: ["recent", "handmade"],
-    image: "1613424777445-f93a2a48e285",
-    gallery: ["1613424777445-f93a2a48e285", "1618722060945-b87f7326995b", "1520408222757-6f9f95d87d5d"],
-    description:
-      "A slender bud vase made for a single dried stem. Mathilde is named after our first studio member and remains a quiet favourite.",
-    material: "Stoneware",
-    dimensions: "H 22cm · Ø 11cm",
-    glaze: "Matte sand",
-    rating: 4.9,
-    reviews: 112,
-    stock: 12,
-  },
-  {
-    slug: "trio-of-stones",
-    name: "Trio of Stones",
-    price: 495,
+    slug: "raw-earth-cups",
+    name: "Raw Earth Cups (Pair)",
+    price: 28,
     discount: 0,
-    category: "Vases",
-    collection: "quiet-forms",
+    category: "Mugs",
+    collection: "raw-earth",
+    tags: ["recent", "handmade"],
+    image: stock.rawEarthCups,
+    gallery: [stock.rawEarthCups, stock.rawEarthMug],
+    description: "Two handle-less cups in raw clay dipped in a deep amber or creamy white glaze.",
+    material: "Raw textured clay",
+    finish: "Unglazed base, amber or cream dip",
+    note: "Sold as a pair, each one slightly different.",
+  },
+  {
+    slug: "thumbprint-mug",
+    name: "Thumbprint Mug",
+    price: 15,
+    discount: 0,
+    category: "Mugs",
+    collection: "raw-earth",
     tags: ["popular", "handmade"],
-    image: "1631125915902-d8abe9225ff2",
-    gallery: ["1631125915902-d8abe9225ff2", "1631125916276-69bcd14e3980", "1631125915597-adf46a94e436"],
+    image: stock.creamMug,
+    gallery: [stock.creamMug, stock.rawEarthMug],
     description:
-      "Three pinched vessels of varying heights, sold as a set. Each one leans slightly, like river stones stacked by hand.",
-    material: "Speckled stoneware",
-    dimensions: "H 14–24cm",
-    glaze: "Raw exterior, clear interior",
-    rating: 4.6,
-    reviews: 41,
-    stock: 7,
+      "A celebration of aesthetic asymmetry: visible thumbprints, a wobbly rim and freehand strokes rather than machine-perfect finishes.",
+    material: "Hand-built clay body",
+    finish: "Glossy cream glaze",
+    note: "The human touch is the point.",
   },
   {
-    slug: "amber-jug",
-    name: "Amber Jug",
-    price: 340,
-    discount: 15,
-    category: "Jars",
-    collection: "terracotta-modern",
-    tags: ["recent"],
-    image: "1771627278991-8922851b9435",
-    gallery: ["1771627278991-8922851b9435", "1749518295706-dc15ca3b5fd5", "1729625561980-be4546863105"],
-    description:
-      "Small-batch jugs and bottles fired together in our wood kiln, each carrying its own ash flashing.",
-    material: "Wood-fired stoneware",
-    dimensions: "H 18–26cm",
-    glaze: "Natural ash",
-    rating: 4.5,
-    reviews: 23,
-    stock: 15,
-  },
-  {
-    slug: "sienna-bowl-set",
-    name: "Sienna Bowl Set",
-    price: 210,
+    slug: "flora-tray",
+    name: "Pressed Flora Tray",
+    price: 20,
     discount: 0,
-    category: "Bowls",
-    collection: "everyday-table",
-    tags: ["popular", "bestseller"],
-    image: "1610701596007-11502861dcfa",
-    gallery: ["1610701596007-11502861dcfa", "1577576223085-3eb295cd414f", "1590422749897-47036da0b0ff"],
+    category: "Home",
+    collection: "pressed-flora",
+    tags: ["popular", "handmade"],
+    image: stock.floraTray,
+    gallery: [stock.floraTray, stock.driedFlora, stock.incense],
     description:
-      "Four nesting bowls dipped halfway so the bare clay foot shows. Oven, microwave and dishwasher safe.",
-    material: "Stoneware",
-    dimensions: "Ø 10–18cm",
-    glaze: "Cream dip glaze",
-    rating: 4.8,
-    reviews: 203,
-    stock: 20,
+      "A one-of-a-kind tray bearing real leaf skeletons and floral imprints, pressed into soft clay and picked out with pastel underglaze.",
+    material: "Hand-built clay body",
+    finish: "Pastel underglaze, glossy glaze",
+    note: "Real leaves and stems, so each imprint is unique.",
   },
   {
-    slug: "cloud-cups",
-    name: "Cloud Cups",
-    price: 96,
+    slug: "flora-incense-holder",
+    name: "Flora Incense Holder",
+    price: 12,
     discount: 0,
-    category: "Mugs",
-    collection: "everyday-table",
+    category: "Home",
+    collection: "pressed-flora",
     tags: ["recent", "handmade"],
-    image: "1590422749897-47036da0b0ff",
-    gallery: ["1590422749897-47036da0b0ff", "1725169412537-acd1cd15e10f", "1610701596007-11502861dcfa"],
-    description:
-      "Soft, rippled espresso cups with a thumb-rest handle. Sold as a stack of four.",
-    material: "Porcelain",
-    dimensions: "H 7cm · 120ml",
-    glaze: "Milk white gloss",
-    rating: 4.7,
-    reviews: 77,
-    stock: 30,
+    image: stock.incense,
+    gallery: [stock.incense, stock.floraTray],
+    description: "An organic accent piece with a delicate natural imprint, ideal for a shelf or bedside table.",
+    material: "Hand-built clay body",
+    finish: "Soft pastel underglaze",
+    note: "One of a kind, never repeated.",
   },
   {
-    slug: "glaze-study-plates",
-    name: "Glaze Study Plates",
-    price: 180,
-    discount: 5,
-    category: "Plates",
-    collection: "everyday-table",
+    slug: "linocut-cat-tote",
+    name: "Linocut Cat Tote",
+    price: 10,
+    discount: 0,
+    category: "Totes & Aprons",
+    collection: "studio-goods",
+    tags: ["bestseller", "handmade"],
+    image: stock.tote,
+    gallery: [stock.tote, stock.linocut, stock.carving],
+    description:
+      "A heavy-duty canvas tote hand-stamped with the studio's block-print cat silhouette and floral motifs.",
+    material: "Heavy-duty canvas",
+    finish: "Hand-stamped linocut ink",
+    note: "Stamped by hand at the studio.",
+  },
+  {
+    slug: "studio-apron",
+    name: "Toma Studio Apron",
+    price: 22,
+    discount: 0,
+    category: "Totes & Aprons",
+    collection: "studio-goods",
     tags: ["popular"],
-    image: "1577576223085-3eb295cd414f",
-    gallery: ["1577576223085-3eb295cd414f", "1610701596007-11502861dcfa", "1725169412537-acd1cd15e10f"],
+    image: ig.wheel,
+    gallery: [ig.wheel, ig.smile],
     description:
-      "Side plates glazed from our test tiles: every set mixes six colours, so no two tables match.",
-    material: "Stoneware",
-    dimensions: "Ø 20cm",
-    glaze: "Assorted",
-    rating: 4.6,
-    reviews: 58,
-    stock: 18,
-  },
-  {
-    slug: "dune-vase",
-    name: "Dune Vase",
-    price: 390,
-    discount: 0,
-    category: "Vases",
-    collection: "quiet-forms",
-    tags: ["handmade"],
-    image: "1520408222757-6f9f95d87d5d",
-    gallery: ["1520408222757-6f9f95d87d5d", "1631125916276-69bcd14e3980", "1613424777445-f93a2a48e285"],
-    description:
-      "A wide-shouldered vase with a chalky finish that takes on the colour of the light around it.",
-    material: "Stoneware",
-    dimensions: "H 26cm · Ø 20cm",
-    glaze: "Chalk white",
-    rating: 4.8,
-    reviews: 39,
-    stock: 5,
-  },
-  {
-    slug: "market-planters",
-    name: "Market Planters",
-    price: 145,
-    discount: 20,
-    category: "Jars",
-    collection: "terracotta-modern",
-    tags: ["bestseller"],
-    image: "1749518295706-dc15ca3b5fd5",
-    gallery: ["1749518295706-dc15ca3b5fd5", "1771627278991-8922851b9435", "1674390521253-79caf82d0ceb"],
-    description:
-      "Classic terracotta pots with drainage holes and saucers. Breathable clay keeps roots happy.",
-    material: "Terracotta",
-    dimensions: "Ø 12 / 16 / 20cm",
-    glaze: "Unglazed",
-    rating: 4.5,
-    reviews: 144,
-    stock: 40,
-  },
-  {
-    slug: "studio-cups",
-    name: "Studio Cups",
-    price: 120,
-    discount: 0,
-    category: "Mugs",
-    collection: "everyday-table",
-    tags: ["popular", "bestseller"],
-    image: "1725169412537-acd1cd15e10f",
-    gallery: ["1725169412537-acd1cd15e10f", "1590422749897-47036da0b0ff", "1577576223085-3eb295cd414f"],
-    description:
-      "Handle-less tumblers for tea, water or wine. Glazed inside, raw and grippy outside.",
-    material: "Stoneware",
-    dimensions: "H 9cm · 250ml",
-    glaze: "Speckled oat",
-    rating: 4.9,
-    reviews: 167,
-    stock: 24,
+      "The official studio uniform: an earth-toned, durable canvas apron with the Toma l'atelier logo. Sold as a souvenir for home crafters.",
+    material: "Earth-toned canvas",
+    finish: "Printed Toma l'atelier logo",
+    note: "Pictured in the studio.",
   },
 ];
 
@@ -301,201 +249,186 @@ export type Collection = {
 
 export const collections: Collection[] = [
   {
-    slug: "earthbound",
-    name: "Earthbound",
-    tagline: "Ancient forms, burnished by hand",
+    slug: "strawberry-cat",
+    name: "Strawberry Cat",
+    tagline: "The studio's fan favourite",
     description:
-      "Vessels that echo centuries of storage jars and amphorae, made with red earthenware dug within 200 miles of the studio.",
-    image: "1618722060945-b87f7326995b",
+      "Pre-fired mugs, plates and trinket dishes with the signature hand-painted strawberry and cat illustrations.",
+    image: stock.strawberryMug,
   },
   {
-    slug: "terracotta-modern",
-    name: "Terracotta Modern",
-    tagline: "Warm clay, clean lines",
+    slug: "raw-earth",
+    name: "Raw Earth",
+    tagline: "Unglazed clay, glossy rim",
     description:
-      "Fluted, carved and spouted pieces that bring the colour of fired earth to contemporary interiors.",
-    image: "1674390521253-79caf82d0ceb",
+      "Asymmetric drinkware that keeps the bottom half raw to show the textured brown clay, dipped in creamy white or deep amber.",
+    image: stock.rawEarthMug,
   },
   {
-    slug: "quiet-forms",
-    name: "Quiet Forms",
-    tagline: "Soft silhouettes, muted glazes",
+    slug: "pressed-flora",
+    name: "Pressed Flora",
+    tagline: "Real leaves, forever imprinted",
     description:
-      "Minimal vases in sand, chalk and stone tones, made to hold a single stem or simply the light.",
-    image: "1631125915902-d8abe9225ff2",
+      "Trays and incense holders bearing real leaf skeletons and floral imprints, highlighted with soft pastel underglazes.",
+    image: stock.floraTray,
   },
   {
-    slug: "everyday-table",
-    name: "Everyday Table",
-    tagline: "Tableware for daily rituals",
+    slug: "studio-goods",
+    name: "Studio Goods",
+    tagline: "Linocut totes and cozy aprons",
     description:
-      "Bowls, plates and cups designed to be used every day, then washed, stacked and used again.",
-    image: "1610701596007-11502861dcfa",
+      "Canvas bags stamped with our cat silhouette and earth-toned aprons printed with the studio logo.",
+    image: stock.tote,
   },
 ];
 
-export type Review = {
+// ---- Workshops (booking) ----
+
+export type Venue = {
+  id: string;
   name: string;
-  avatar: string;
-  location: string;
-  rating: number;
-  product: string;
-  date: string;
-  text: string;
+  role: string;
 };
 
-export const reviews: Review[] = [
-  {
-    name: "Amelia Hart",
-    avatar: avatars[0],
-    location: "London, UK",
-    rating: 5,
-    product: "Mathilde",
-    date: "Sep 2026",
-    text: "The glaze is even more beautiful in person. It arrived wrapped like a gift and now lives on my desk with a single dried stem.",
-  },
-  {
-    name: "Jonah Reyes",
-    avatar: avatars[1],
-    location: "Austin, US",
-    rating: 5,
-    product: "Wheel Throwing Basics",
-    date: "Aug 2026",
-    text: "I booked the two-hour wheel class with zero experience and left with three wobbly but very loved bowls. Patient, generous teachers.",
-  },
-  {
-    name: "Sofia Lind",
-    avatar: avatars[2],
-    location: "Stockholm, SE",
-    rating: 4,
-    product: "Sienna Bowl Set",
-    date: "Aug 2026",
-    text: "Heavier than I expected in the best way. They nest perfectly and go straight from oven to table.",
-  },
-  {
-    name: "Priya Nair",
-    avatar: img("1489278353717-f64c6ee8a4d2", 160),
-    location: "Toronto, CA",
-    rating: 5,
-    product: "Custom Order",
-    date: "Jul 2026",
-    text: "We commissioned twelve cups for our wedding table. The studio sent sketches and glaze tests before firing. Truly heirloom pieces.",
-  },
-  {
-    name: "Marcus Bell",
-    avatar: img("1758876204244-930299843f07", 160),
-    location: "Bristol, UK",
-    rating: 5,
-    product: "Ancient Vessel",
-    date: "Jun 2026",
-    text: "A centrepiece. Friends always ask where it's from. The burnished surface feels like warm stone.",
-  },
-  {
-    name: "Lena Okafor",
-    avatar: img("1567516364473-233c4b6fcfbe", 160),
-    location: "Lagos, NG",
-    rating: 4,
-    product: "Glaze & Paint Night",
-    date: "May 2026",
-    text: "Such a fun evening with friends. The pieces came back from the kiln two weeks later and they look surprisingly professional.",
-  },
+export const venues: Venue[] = [
+  { id: "el-studio", name: "El Studio", role: "Central home for multi-day workshop tracks" },
+  { id: "error-cafe", name: "Error Cafe", role: "Evening “Art & Coffee” social takeovers" },
+  { id: "blooms", name: "Blooms Bookstore", role: "Single-day cultural pop-ups" },
+  { id: "poiema", name: "Poiema House", role: "Single-day cultural pop-ups" },
+  { id: "lilyzak", name: "Lilyzak", role: "Single-day cultural pop-ups" },
+  { id: "daze", name: "Dazè Damascus", role: "Single-day cultural pop-ups" },
 ];
 
-// ---- Studio workshops (booking) ----
+export const getVenue = (id: string) => venues.find((v) => v.id === id)!;
 
 export type Workshop = {
   id: string;
+  track: "Slow Travel & Damascus Soul" | "Private Sanctuary" | "Studio Craft";
   title: string;
   short: string;
   description: string;
-  duration: number; // minutes
-  price: number;
-  capacity: number;
-  level: "Beginner" | "All levels" | "Intermediate";
+  includes: string;
+  duration: number; // minutes (placeholder)
+  price: number; // per seat, USD (placeholder)
+  capacity: number; // placeholder
+  level: "All levels" | "Intermediate";
   image: string;
-  instructor: string;
-  // Hours of the day (24h) this workshop starts on, per weekday (0 = Sun)
-  schedule: Partial<Record<number, number[]>>;
+  venue: string; // Venue id
+  schedule: Partial<Record<number, number[]>>; // weekday (0 = Sun) → start hours (placeholder)
 };
 
-export const instructors = {
-  helena: { name: "Helena Moss", role: "Studio Founder", avatar: avatars[0] },
-  theo: { name: "Theo Grant", role: "Wheel Specialist", avatar: avatars[1] },
-  ines: { name: "Inès Laurent", role: "Glaze Artist", avatar: avatars[2] },
-} as const;
-
-export type InstructorId = keyof typeof instructors;
-
-export const workshops: (Workshop & { instructor: InstructorId })[] = [
-  {
-    id: "wheel-basics",
-    title: "Wheel Throwing Basics",
-    short: "Centre, open and pull your first pots",
-    description:
-      "A hands-on introduction to the potter's wheel. You'll throw two to three pieces which we trim, glaze and fire for you.",
-    duration: 120,
-    price: 85,
-    capacity: 8,
-    level: "Beginner",
-    image: photos.terracottaWheel,
-    instructor: "theo",
-    schedule: { 1: [10, 18], 2: [10], 3: [10, 18], 4: [14], 5: [10, 18], 6: [9, 13, 16], 0: [11] },
-  },
+export const workshops: Workshop[] = [
   {
     id: "hand-building",
-    title: "Hand-Building Studio",
-    short: "Pinch, coil and slab techniques",
+    track: "Studio Craft",
+    title: "Hand-Building Session",
+    short: "Pinch, coil and slab: no wheel needed",
     description:
-      "No wheel needed. Learn the oldest pottery techniques to build sculptural vessels, planters and plates.",
+      "Guided instruction in ancient hand-building techniques. Sculpt a functional vessel from raw organic clay, then add texture with stamping, carving and sgraffito.",
+    includes: "Clay, tools, glaze and kiln firing",
     duration: 150,
-    price: 70,
-    capacity: 10,
+    price: 25,
+    capacity: 12,
     level: "All levels",
-    image: photos.slabWork,
-    instructor: "helena",
-    schedule: { 2: [14], 4: [10, 18], 6: [11], 0: [14] },
+    image: ig.wheel,
+    venue: "el-studio",
+    schedule: { 2: [17], 4: [17], 6: [11, 15], 0: [15] },
   },
   {
-    id: "glaze-night",
-    title: "Glaze & Paint Night",
-    short: "Decorate bisque pieces with friends",
+    id: "porcelain-painting",
+    track: "Studio Craft",
+    title: "Porcelain & Underglaze Painting",
+    short: "Paint freehand on a blank ceramic biscuit",
     description:
-      "Choose a bisque-fired bowl, mug or plate and decorate it with underglaze and dip glazes. Drinks included.",
-    duration: 90,
-    price: 48,
+      "Treat a pre-fired ceramic biscuit as a blank canvas and illustrate it freehand with premium underglazes. Art & Coffee evenings with curated music.",
+    includes: "Biscuit, underglazes, brushes and kiln firing",
+    duration: 120,
+    price: 22,
     capacity: 14,
     level: "All levels",
-    image: photos.painting,
-    instructor: "ines",
-    schedule: { 3: [19], 5: [19], 6: [19] },
+    image: ig.table,
+    venue: "error-cafe",
+    schedule: { 3: [18], 5: [18], 6: [18] },
   },
   {
-    id: "private-session",
-    title: "Private Wheel Session",
-    short: "One-to-one with a resident potter",
+    id: "heritage-art-night",
+    track: "Slow Travel & Damascus Soul",
+    title: "Sufi & Levantine Heritage Art Night",
+    short: "Paint the geometry of the Old City",
     description:
-      "Tailored to your goals — from first-timers to returning potters perfecting trimming or lidded forms.",
-    duration: 60,
-    price: 120,
-    capacity: 2,
-    level: "Intermediate",
-    image: photos.focusedPotter,
-    instructor: "helena",
-    schedule: { 1: [12, 15], 2: [12, 16], 3: [12, 15], 4: [12, 16], 5: [12, 15] },
-  },
-  {
-    id: "custom-consult",
-    title: "Custom Design Consult",
-    short: "30-minute video call with our designers",
-    description:
-      "Plan a commission — tableware sets, wedding gifts or a statement vase. We'll sketch together and send glaze samples.",
-    duration: 30,
-    price: 24,
-    capacity: 1,
+      "A themed night celebrating regional Syrian culture. Paint intricate geometric motifs and traditional patterns inspired by the historical architecture of Old Damascus.",
+    includes: "Ceramic biscuit, underglazes and kiln firing",
+    duration: 150,
+    price: 28,
+    capacity: 16,
     level: "All levels",
-    image: photos.carving,
-    instructor: "ines",
-    schedule: { 1: [9, 11, 16], 2: [9, 11, 16], 3: [9, 11, 16], 4: [9, 11, 16], 5: [9, 11, 16] },
+    image: ig.damascus,
+    venue: "blooms",
+    schedule: { 4: [18], 5: [16] },
+  },
+  {
+    id: "botanical-imprinting",
+    track: "Slow Travel & Damascus Soul",
+    title: "Botanical Imprinting",
+    short: "Press real leaves into soft clay",
+    description:
+      "Press live flora, stems and leaves directly into soft clay, then enhance them with delicate pastel underglazes that lock the natural elements into the glaze.",
+    includes: "Clay, flora, underglazes and kiln firing",
+    duration: 120,
+    price: 24,
+    capacity: 10,
+    level: "All levels",
+    image: stock.driedFlora,
+    venue: "daze",
+    schedule: { 0: [12], 2: [12], 6: [13] },
+  },
+  {
+    id: "linocut-printing",
+    track: "Studio Craft",
+    title: "Linocut & Textile Printing",
+    short: "Carve a stamp, print it on cloth",
+    description:
+      "Design, gouge and carve your own linoleum stamp, then hand-print it onto organic fabric, paper packaging and tote bags using transfer ink.",
+    includes: "Linoleum, carving tools, inks and a tote bag",
+    duration: 120,
+    price: 20,
+    capacity: 10,
+    level: "All levels",
+    image: stock.carving,
+    venue: "poiema",
+    schedule: { 1: [16], 6: [12] },
+  },
+  {
+    id: "private-sanctuary",
+    track: "Private Sanctuary",
+    title: "Private Sanctuary Session",
+    short: "Low light, quiet music, slow hands",
+    description:
+      "An intimate art escape for tactile exploration. Individual space, low lighting, acoustic ambiance and slow hand-sculpting to help you unplug from digital distraction.",
+    includes: "Clay, tools and kiln firing",
+    duration: 150,
+    price: 35,
+    capacity: 6,
+    level: "All levels",
+    image: ig.shelves,
+    venue: "el-studio",
+    schedule: { 1: [18], 3: [11], 5: [11] },
+  },
+  {
+    id: "anatomical-sculpting",
+    track: "Studio Craft",
+    title: "Anatomical & Specialized Sculpting",
+    short: "Hand-formed ears, faces and abstract forms",
+    description:
+      "An intermediate session for building complex structures: hand-formed human ears, facial features or abstract geometric additions onto functional mugs and vases.",
+    includes: "Clay, tools and kiln firing",
+    duration: 150,
+    price: 30,
+    capacity: 8,
+    level: "Intermediate",
+    image: ig.smile,
+    venue: "lilyzak",
+    schedule: { 6: [10] },
   },
 ];
 
@@ -521,7 +454,7 @@ export function sessionsForDay(date: Date): Session[] {
         id: `${w.id}-${dayKey}-${start}`,
         workshopId: w.id,
         start,
-        booked: Math.floor(seeded(dayKey + wi * 31 + start) * (w.capacity + 1)),
+        booked: Math.floor(seeded(dayKey + wi * 31 + start) * (w.capacity * 0.8)),
       })),
     )
     .sort((a, b) => a.start - b.start);
@@ -539,3 +472,35 @@ export const endTime = (start: number, minutes: number) => {
   const total = start * 60 + minutes;
   return formatHour(Math.floor(total / 60), total % 60);
 };
+
+// ---- Brand copy ----
+
+export const pillars = [
+  { title: "Tactile Discovery", text: "The grounding sensory experience of working raw earth with your hands." },
+  { title: "Creative Inclusivity", text: "Equal opportunity for all ages and skill levels, from kids' sessions to adult training." },
+  { title: "Atmospheric Warmth", text: "Rustic studio elements meet social collaboration, often as a workshop-café." },
+  { title: "Creative Mindfulness", text: "Art-making as restorative art therapy and community connection, not commercial production." },
+];
+
+export const faqs = [
+  {
+    q: "Do I need pottery experience?",
+    a: "No. All skill levels are welcome and our resident artists guide you step by step.",
+  },
+  {
+    q: "Do I need to reserve a seat?",
+    a: "Walk-ins are not prohibited, but clay, tools and venue space are limited, so advance reservations are preferred for every event. Message us on Instagram or WhatsApp.",
+  },
+  {
+    q: "When can I collect my piece?",
+    a: "Ceramics go through a glaze firing in an industrial kiln. Finished workshop pieces are ready for pickup 10 to 14 days after the workshop.",
+  },
+  {
+    q: "What is included in a workshop seat?",
+    a: "Premium clay or porcelain, professional tools, underglazes and full kiln firing. Café drinks and music are part of the atmosphere.",
+  },
+  {
+    q: "Can I host a private or corporate event?",
+    a: "Yes. We curate private takeovers for small groups, birthdays and teams, with a tailored playlist and private venue hosting.",
+  },
+];

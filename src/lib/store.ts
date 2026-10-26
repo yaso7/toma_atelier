@@ -47,7 +47,7 @@ function createStore<T>(key: string, initial: T) {
 
 export type CartLine = { slug: string; qty: number };
 
-const cart = createStore<CartLine[]>("clayra-cart", []);
+const cart = createStore<CartLine[]>("toma-cart", []);
 
 export const useCart = cart.useStore;
 
@@ -81,7 +81,7 @@ export type Booking = {
   notes?: string;
 };
 
-const bookings = createStore<Booking[]>("clayra-bookings", []);
+const bookings = createStore<Booking[]>("toma-bookings", []);
 
 export const useBookings = bookings.useStore;
 

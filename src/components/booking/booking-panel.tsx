@@ -3,13 +3,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import { format } from "date-fns";
-import { CalendarDays, CheckCircle2, Clock, Minus, Plus, X } from "lucide-react";
+import { CalendarDays, CheckCircle2, Clock, MapPin, MessageCircle, Minus, Plus, X } from "lucide-react";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { endTime, formatHour, getWorkshop, img, instructors, photos, type Session } from "@/lib/data";
+import { brand, endTime, formatHour, getVenue, getWorkshop, ig, img, whatsapp, type Session } from "@/lib/data";
 import { addBooking, type Booking } from "@/lib/store";
 
 export function BookingPanel({
@@ -26,12 +26,12 @@ export function BookingPanel({
   if (!session) {
     return (
       <div className="relative isolate overflow-hidden rounded-sm p-6 text-white">
-        <Image src={img(photos.centering, 800)} alt="" fill sizes="360px" className="-z-20 object-cover" />
+        <Image src={ig.table} alt="" fill sizes="360px" className="-z-20 object-cover" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/80 to-black/30" />
         <CalendarDays className="size-6 text-clay-light" />
         <p className="mt-16 font-serif text-3xl leading-tight">Pick a session from the day view</p>
         <p className="mt-2 text-xs text-white/70">
-          Choose any open time slot to reserve your place at the wheel. Coloured blocks show what&apos;s on each day.
+          Choose a time slot to request your seat. Coloured blocks show what is on each day, and the studio confirms by message.
         </p>
       </div>
     );
@@ -52,7 +52,7 @@ function BookingForm({
   onClear: () => void;
 }) {
   const w = getWorkshop(session.workshopId);
-  const teacher = instructors[w.instructor];
+  const venue = getVenue(w.venue);
   const spots = Math.max(0, w.capacity - session.booked);
   const [guests, setGuests] = useState(1);
   const [confirmed, setConfirmed] = useState<Booking | null>(null);
@@ -108,8 +108,7 @@ function BookingForm({
               <Clock className="size-3.5 text-clay" /> {formatHour(session.start)} – {endTime(session.start, w.duration)}
             </li>
             <li className="flex items-center gap-2">
-              <Image src={teacher.avatar} alt="" width={16} height={16} className="size-4 rounded-full object-cover" />
-              with {teacher.name}
+              <MapPin className="size-3.5 text-clay" /> {venue.name}, Damascus
             </li>
           </ul>
 
@@ -158,7 +157,7 @@ function BookingForm({
               <Label htmlFor="b-notes" className="text-xs">
                 Notes <span className="text-muted-foreground">(optional)</span>
               </Label>
-              <Textarea id="b-notes" name="notes" rows={2} className="bg-cream/40" placeholder="Allergies, accessibility, occasion…" />
+              <Textarea id="b-notes" name="notes" rows={2} className="bg-cream/40" placeholder="Occasion, accessibility, anything we should know" />
             </div>
           </div>
 
@@ -168,8 +167,8 @@ function BookingForm({
             </span>
             <span className="font-serif text-3xl">${guests * w.price}</span>
           </div>
-          <button className="w-full rounded-full bg-ink py-3 text-sm font-medium text-white transition-colors hover:bg-clay">
-            Confirm Booking
+          <button className="w-full rounded-full bg-cobalt py-3 text-sm font-medium text-white transition-colors hover:bg-cobalt/85">
+            Reserve My Seat
           </button>
         </div>
       </form>
@@ -186,9 +185,9 @@ function BookingForm({
         <DialogContent className="bg-cream sm:max-w-md">
           <div className="flex flex-col items-center text-center">
             <CheckCircle2 className="size-10 text-clay" strokeWidth={1.4} />
-            <DialogTitle className="mt-4 font-serif text-4xl font-normal">You&apos;re booked!</DialogTitle>
+            <DialogTitle className="mt-4 font-serif text-4xl font-normal">Seat requested!</DialogTitle>
             <DialogDescription className="mt-2 text-sm">
-              See you at the studio, {confirmed?.name.split(" ")[0]}. A confirmation has been sent to {confirmed?.email}.
+              Thank you, {confirmed?.name.split(" ")[0]}. Send us a quick message so the team can confirm your seat. Reservations are handled on WhatsApp and Instagram.
             </DialogDescription>
             <div className="mt-6 w-full rounded-sm bg-white p-4 text-left text-xs">
               <p className="font-serif text-xl">{w.title}</p>
@@ -196,9 +195,25 @@ function BookingForm({
                 {format(date, "EEEE, d MMMM")} · {formatHour(session.start)} · {guests} guest{guests > 1 ? "s" : ""}
               </p>
               <p className="mt-3 flex justify-between border-t border-ink/10 pt-3 font-medium">
-                Total paid at studio <span>${guests * w.price}</span>
+                Pay at the studio <span>${guests * w.price}</span>
               </p>
             </div>
+            {confirmed && (
+              <a
+                href={whatsapp(
+                  `Hello Toma l'atelier, I'd like to reserve ${confirmed.guests} seat${confirmed.guests > 1 ? "s" : ""} for ${w.title} on ${format(date, "EEEE d MMMM")} at ${formatHour(session.start)} (${venue.name}). Name: ${confirmed.name}.`,
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-cobalt py-3 text-sm font-medium text-white hover:bg-cobalt/85"
+              >
+                <MessageCircle className="size-4" /> Confirm on WhatsApp
+              </a>
+            )}
+            <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
+              Your piece goes through a glaze firing and will be ready for pickup {brand.kilnDays} after the workshop.
+              Prefer Instagram? DM @{brand.instagram}.
+            </p>
           </div>
         </DialogContent>
       </Dialog>

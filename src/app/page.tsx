@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { ProductShowcase } from "@/components/product/product-showcase";
-import { AvatarStack, Chip, PillLink } from "@/components/site/primitives";
-import { avatars, img, photos, products } from "@/lib/data";
+import { Chip, PillLink } from "@/components/site/primitives";
+import { brand, ig, img, pillars, stock, venues, whatsapp } from "@/lib/data";
 
 const features = [
-  { text: "Shaping Earth into Art", image: "1674390521253-79caf82d0ceb" },
-  { text: "Crafted from Clay, Made with Soul", image: "1729625561980-be4546863105" },
-  { text: "Timeless Pottery, Handmade Beauty", image: "1618722060945-b87f7326995b" },
-  { text: "Where Clay Becomes Culture", image: "1613424777445-f93a2a48e285" },
+  { text: pillars[0].title, image: ig.kiln },
+  { text: pillars[1].title, image: ig.smile },
+  { text: pillars[2].title, image: ig.venue },
+  { text: pillars[3].title, image: ig.damascus },
 ];
 
 export default function Home() {
@@ -17,10 +17,11 @@ export default function Home() {
     <>
       <Hero />
       <Features />
-      <ArtisanIntro />
+      <Intro />
       <ProductShowcase />
-      <ChicBanner />
+      <LivingWorkshop />
       <Creativity />
+      <Venues />
     </>
   );
 }
@@ -29,8 +30,8 @@ function Hero() {
   return (
     <section className="relative isolate flex min-h-[640px] flex-col overflow-hidden text-white md:h-[100svh] md:max-h-[820px]">
       <Image
-        src={img(photos.heroHands, 2000)}
-        alt="Hands shaping a terracotta pot on a wheel"
+        src={img(stock.heroHands, 2000)}
+        alt="Hands shaping raw clay on a wheel"
         fill
         priority
         sizes="100vw"
@@ -40,18 +41,18 @@ function Hero() {
 
       <div className="container-page flex flex-1 flex-col pt-24 pb-8 md:pt-28 md:pb-12">
         <div className="flex flex-1 flex-col items-center justify-center text-center">
-          <h1 className="font-display text-[clamp(3.5rem,11vw,10rem)] font-light">Crafting Memories</h1>
+          <h1 className="font-display text-[clamp(3.25rem,10vw,9rem)] font-light">Stop Thinking, Start Shaping</h1>
 
           <div className="mt-6 flex items-center justify-center gap-3">
-            <PillLink href="/shop" variant="light">
-              Explore Clay
+            <PillLink href="/booking" variant="light">
+              Book a Seat
             </PillLink>
             <Link
               href="/about#process"
-              aria-label="Watch our process"
-              className="grid size-11 place-items-center rounded-full bg-white text-ink transition-transform hover:scale-105"
+              aria-label="See how it works"
+              className="grid size-11 place-items-center rounded-full bg-white text-cobalt transition-transform hover:scale-105"
             >
-              <Play className="size-4 fill-ink" />
+              <Play className="size-4 fill-cobalt" />
             </Link>
           </div>
         </div>
@@ -59,24 +60,24 @@ function Hero() {
         <div className="flex flex-col gap-6 pt-10 md:flex-row md:items-end md:justify-between">
           <Link
             href="/about"
-            className="flex w-full max-w-xs items-center gap-4 rounded-sm bg-white p-2 pr-6 text-ink shadow-xl transition-transform hover:-translate-y-1"
+            className="flex w-full max-w-xs items-center gap-4 rounded-sm bg-cream p-2 pr-6 text-ink shadow-xl transition-transform hover:-translate-y-1"
           >
             <Image
-              src={img(photos.womanWheel, 300)}
-              alt="Potter at the wheel"
+              src={ig.wheel}
+              alt="Working at the wheel in a Toma apron"
               width={110}
               height={110}
-              className="size-24 rounded-sm object-cover md:size-28"
+              className="size-24 rounded-sm object-cover object-top md:size-28"
             />
             <div>
-              <Chip className="text-[9px]">Artful Clay Design</Chip>
-              <p className="mt-2 font-serif text-2xl leading-[0.95] md:text-[28px]">Elegance Shaped by Hand</p>
+              <Chip className="text-[9px]">{brand.tagline}</Chip>
+              <p className="mt-2 font-serif text-2xl leading-[0.95] md:text-[28px]">A Living Workshop in Damascus</p>
             </div>
           </Link>
-          <div className="max-w-[220px]">
-            <p className="font-serif text-2xl">Shape Your World in Clay</p>
-            <p className="mt-2 text-xs leading-relaxed text-white/75">
-              Shape your creativity with every touch of clay.
+          <div className="max-w-[240px]">
+            <p className="font-script text-3xl leading-none">Slow down with raw earth</p>
+            <p className="mt-2 text-xs leading-relaxed text-white/80">
+              Mindful, hands-on art therapy: no experience needed, everything included.
             </p>
           </div>
         </div>
@@ -92,9 +93,9 @@ function Features() {
         {features.map((f) => (
           <li
             key={f.text}
-            className="flex items-center gap-3 rounded-full border border-ink/10 bg-white/50 p-1.5 pr-5 shadow-[0_1px_0_rgba(0,0,0,0.03)]"
+            className="flex items-center gap-3 rounded-full border border-ink/10 bg-white/60 p-1.5 pr-5 shadow-[0_1px_0_rgba(0,0,0,0.03)]"
           >
-            <Image src={img(f.image, 120)} alt="" width={44} height={44} className="size-11 rounded-full object-cover" />
+            <Image src={f.image} alt="" width={44} height={44} className="size-11 rounded-full object-cover" />
             <span className="text-xs leading-tight font-medium">{f.text}</span>
           </li>
         ))}
@@ -103,35 +104,34 @@ function Features() {
   );
 }
 
-function ArtisanIntro() {
+function Intro() {
   return (
     <section className="container-page grid gap-10 py-20 lg:grid-cols-[180px_1fr_340px] lg:gap-12">
       <div className="flex flex-col justify-between gap-8">
         <div className="space-y-12">
-          <Chip>Art of Pottery</Chip>
-          <p className="max-w-[160px] text-xs leading-relaxed text-muted-foreground">
-            Let your creativity flow through the art of pottery.
+          <Chip>Art Therapy, Slow Living</Chip>
+          <p className="max-w-[170px] text-xs leading-relaxed text-muted-foreground">
+            A calm, creative haven that slows the pace of everyday life through physical craft.
           </p>
         </div>
         <div>
-          <AvatarStack srcs={avatars.slice(0, 2)} />
-          <p className="mt-3 font-serif text-6xl font-light text-clay-light">10k+</p>
-          <p className="mt-1 text-xs font-medium">Satisfied Customers</p>
+          <p className="font-serif text-6xl font-light text-clay-light">20K</p>
+          <p className="mt-1 text-xs font-medium">Community on Instagram</p>
         </div>
       </div>
 
       <div className="flex flex-col justify-between gap-10">
-        <h2 className="font-display text-5xl md:text-6xl lg:text-[64px]">
-          Artisan Pottery that Stands the Test of Time
+        <h2 className="font-display text-5xl text-clay md:text-6xl lg:text-[64px]">
+          Where Historical Craft Meets Modern Self-Expression
         </h2>
         <div className="flex gap-3">
-          <Link href="/shop/glaze-study-plates" className="relative size-36 overflow-hidden rounded-sm md:size-40">
-            <Image src={img(photos.glazes, 400)} alt="Glazed plates" fill sizes="160px" className="object-cover" />
+          <Link href="/booking" className="relative h-44 w-32 overflow-hidden rounded-sm md:h-52 md:w-36">
+            <Image src={ig.kiln} alt="Opening the kiln" fill sizes="144px" className="object-cover" />
           </Link>
-          <Link href="/collections" className="relative size-36 overflow-hidden rounded-sm md:size-40">
-            <Image src={img(photos.greyPot, 400)} alt="Pot on the wheel" fill sizes="160px" className="object-cover" />
+          <Link href="/collections" className="relative h-44 w-32 overflow-hidden rounded-sm md:h-52 md:w-36">
+            <Image src={ig.sea} alt="Pouring slip by the sea" fill sizes="144px" className="object-cover" />
             <span className="absolute bottom-3 left-3 rounded-full bg-white px-3 py-1.5 text-[10px] font-medium">
-              Golden Clay
+              Slow Travel
             </span>
           </Link>
         </div>
@@ -139,53 +139,47 @@ function ArtisanIntro() {
 
       <Link href="/booking" className="group relative block aspect-[4/5] overflow-hidden rounded-sm lg:aspect-auto">
         <Image
-          src={img(photos.terracottaWheel, 900)}
-          alt="Hands throwing a terracotta pot"
+          src={ig.table}
+          alt="Guests painting ceramics at a shared table"
           fill
           sizes="(min-width: 1024px) 340px, 100vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-x-4 bottom-4 bg-white p-4">
-          <p className="font-serif text-2xl leading-[1.05]">Unveil Your Artistry, Discover Your Clay-ness</p>
+        <div className="absolute inset-x-4 bottom-4 bg-cream p-4">
+          <p className="font-serif text-2xl leading-[1.05]">Anyone can create something beautiful</p>
         </div>
       </Link>
     </section>
   );
 }
 
-function ChicBanner() {
-  const side = [products[0], products[2]];
+function LivingWorkshop() {
+  const shots = [
+    { src: ig.damascus, alt: "Painting night in Damascus" },
+    { src: ig.smile, alt: "Guest in a Toma apron" },
+    { src: ig.wheel, alt: "Shaping clay at the wheel" },
+    { src: ig.shelves, alt: "The studio wheel and shelves" },
+  ];
   return (
-    <section className="relative isolate overflow-hidden text-white">
-      <Image
-        src={img(photos.smilingPotter, 2000)}
-        alt="Smiling potter at the wheel"
-        fill
-        sizes="100vw"
-        className="-z-20 object-cover object-[60%_30%]"
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/60 via-black/15 to-transparent" />
-      <div className="container-page relative flex min-h-[560px] flex-col justify-end py-12 md:min-h-[680px]">
-        <div className="absolute top-10 right-5 hidden flex-col gap-3 md:right-10 md:flex">
-          {side.map((p) => (
-            <Link
-              key={p.slug}
-              href={`/shop/${p.slug}`}
-              className="w-40 bg-white/95 p-2 text-ink shadow-lg transition-transform hover:-translate-y-1"
-            >
-              <div className="relative aspect-square overflow-hidden">
-                <Image src={img(p.image, 300)} alt={p.name} fill sizes="160px" className="object-cover" />
-              </div>
-              <p className="mt-2 text-center text-[11px] font-medium">{p.name}</p>
-            </Link>
+    <section className="relative isolate overflow-hidden bg-espresso text-white">
+      <div className="container-page py-16 md:py-24">
+        <div className="grid items-end gap-8 md:grid-cols-[1.3fr_1fr]">
+          <h2 className="font-display text-5xl md:text-7xl">Inside the Living Workshop</h2>
+          <div className="flex gap-10 md:justify-end">
+            <Stat value="6" label={["Partner venues", "across Damascus"]} />
+            <Stat value="14d" label={["Kiln to pickup", "10 to 14 days"]} />
+          </div>
+        </div>
+        <ul className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {shots.map((s, i) => (
+            <li key={s.src} className={`relative aspect-[3/4] overflow-hidden rounded-sm ${i % 2 ? "md:mt-10" : ""}`}>
+              <Image src={s.src} alt={s.alt} fill sizes="(min-width: 768px) 25vw, 50vw" className="object-cover" />
+            </li>
           ))}
-        </div>
-
-        <div className="flex gap-10">
-          <Stat value="13" label={["Stores in", "United States"]} />
-          <Stat value="132" label={["Countries with", "Free Shipping"]} />
-        </div>
-        <h2 className="mt-6 max-w-xl font-display text-5xl md:text-7xl">Sleek and Chic Pottery for Discerning Tastes</h2>
+        </ul>
+        <p className="mt-10 max-w-lg font-script text-3xl text-clay-light">
+          Cozy, warm-lit and a little nostalgic: smooth jazz, coffee and a vintage rotary phone for your photo corner.
+        </p>
       </div>
     </section>
   );
@@ -194,7 +188,7 @@ function ChicBanner() {
 function Stat({ value, label }: { value: string; label: [string, string] }) {
   return (
     <div className="flex items-center gap-2.5">
-      <span className="font-serif text-4xl font-light text-clay-light">{value}</span>
+      <span className="font-serif text-5xl font-light text-clay-light">{value}</span>
       <span className="text-[11px] leading-tight text-white/80">
         {label[0]}
         <br />
@@ -207,31 +201,33 @@ function Stat({ value, label }: { value: string; label: [string, string] }) {
 function Creativity() {
   return (
     <section className="container-page grid items-center gap-14 py-24 lg:grid-cols-2">
-      <div className="grid grid-cols-2 gap-3">
-        <div className="flex flex-col gap-4 pt-2">
-          <AvatarStack srcs={avatars} size={36} />
-          <p className="font-serif text-2xl leading-tight">Create Something Timeless with Every Touch of Clay</p>
+      <div className="grid grid-cols-2 gap-3 md:gap-4">
+        <div className="flex flex-col gap-4 border-t border-clay/30 pt-4">
+          <p className="font-script text-4xl leading-none text-clay">Make a memory with your hands</p>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            Slow travel and slow living: create something physical, take it home after the kiln.
+          </p>
         </div>
         <div className="relative aspect-square overflow-hidden rounded-sm">
-          <Image src={img(photos.pinchingPot, 600)} alt="Hands holding a fresh pot" fill sizes="25vw" className="object-cover" />
+          <Image src={ig.smile} alt="Guest holding up a fresh piece" fill sizes="25vw" className="object-cover object-top" />
         </div>
-        <div className="relative col-span-2 -mt-16 aspect-[16/8] overflow-hidden rounded-sm md:-mt-24">
+        <div className="relative col-span-2 aspect-[16/10] overflow-hidden rounded-sm md:aspect-[16/9]">
           <Image
-            src={img(photos.focusedPotter, 1100)}
-            alt="Potter shaping a bowl"
+            src={ig.venue}
+            alt="An evening pop-up at a Damascus café"
             fill
             sizes="(min-width: 1024px) 45vw, 100vw"
-            className="object-cover"
+            className="object-cover object-[50%_35%]"
           />
           <Link
-            href="/custom-orders"
-            className="absolute inset-x-3 bottom-3 flex items-center gap-4 bg-white px-4 py-3 text-ink md:inset-x-4"
+            href="/private-events"
+            className="absolute inset-x-3 bottom-3 flex items-center gap-4 bg-cream px-4 py-3 text-ink md:inset-x-4"
           >
-            <span className="font-serif text-4xl font-light text-clay-light">309+</span>
+            <span className="font-script text-4xl text-clay">Host</span>
             <span>
-              <span className="block text-sm font-medium">Custom Pottery Design</span>
+              <span className="block text-sm font-medium">Private &amp; corporate events</span>
               <span className="block text-[11px] text-muted-foreground">
-                Handcrafted pottery tailored to your vision.
+                Birthdays, teams and small groups, with a playlist made for you.
               </span>
             </span>
           </Link>
@@ -239,41 +235,43 @@ function Creativity() {
       </div>
 
       <div>
-        <Chip>Modern Clay Studio</Chip>
-        <h2 className="mt-5 font-display text-5xl md:text-[64px]">
-          Unleash Your Creativity with{" "}
-          <span className="inline-flex items-center gap-3 align-middle">
-            Clay
-            <span className="inline-flex -space-x-3">
-              {[photos.glazes, photos.vaseShelf, photos.cupsRow].map((p) => (
-                <Image
-                  key={p}
-                  src={img(p, 120)}
-                  alt=""
-                  width={48}
-                  height={48}
-                  className="size-11 rounded-full border-2 border-cream object-cover md:size-12"
-                />
-              ))}
-            </span>
-          </span>
-        </h2>
+        <Chip>All skill levels welcome</Chip>
+        <h2 className="mt-5 font-display text-5xl text-clay md:text-[64px]">Unleash Your Creativity with Clay</h2>
         <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-          Whether you are crafting a gift, building a pottery business or simply slowing down, start by considering the
-          essence of your style. Handcrafted, one-of-a-kind pieces, or modern, minimalist designs — our studio helps you
-          shape both.
+          Each seat includes premium clay or porcelain, professional tools, underglazes and full kiln firing. Resident
+          artists guide you step by step, so no prior pottery experience is needed.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-6">
           <PillLink href="/booking">Start Creating</PillLink>
-          <Link href="/booking?workshop=custom-consult" className="flex items-center gap-3">
-            <span className="font-serif text-3xl">$24</span>
+          <a
+            href={whatsapp("Hello Toma l'atelier, I'd like to reserve a seat.")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3"
+          >
+            <span className="font-serif text-2xl text-cobalt">{brand.bookingPhone}</span>
             <span className="border-l border-ink/20 pl-3 text-[11px] leading-tight font-medium">
-              30 Minute Video
+              Booking line
               <br />
-              Consultants
+              WhatsApp
             </span>
-          </Link>
+          </a>
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Venues() {
+  return (
+    <section className="container-page pb-4">
+      <div className="flex flex-col items-start justify-between gap-5 border-y border-ink/10 py-6 md:flex-row md:items-center">
+        <p className="shrink-0 font-script text-3xl text-clay">Find us around Damascus</p>
+        <ul className="flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium">
+          {venues.map((v) => (
+            <li key={v.id}>{v.name}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );

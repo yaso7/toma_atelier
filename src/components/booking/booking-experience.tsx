@@ -12,11 +12,13 @@ import { BookingPanel } from "./booking-panel";
 import { MyBookings } from "./my-bookings";
 
 export const workshopColor: Record<string, string> = {
-  "wheel-basics": "#c0703f",
-  "hand-building": "#7d7346",
-  "glaze-night": "#a0525a",
-  "private-session": "#7a5c45",
-  "custom-consult": "#c9933f",
+  "hand-building": "#c86446",
+  "porcelain-painting": "#1d3557",
+  "heritage-art-night": "#b97a2e",
+  "botanical-imprinting": "#6f7a45",
+  "linocut-printing": "#7a5c45",
+  "private-sanctuary": "#7a4e63",
+  "anatomical-sculpting": "#a8452f",
 };
 
 const FIRST_HOUR = 9;
@@ -149,7 +151,7 @@ function NavButton({
       aria-label={label}
       onClick={onClick}
       disabled={disabled}
-      className="grid size-8 place-items-center rounded-full bg-ink text-white transition-opacity hover:bg-ink/85 disabled:opacity-25"
+      className="grid size-8 place-items-center rounded-full bg-cobalt text-white transition-opacity hover:bg-cobalt/85 disabled:opacity-25"
     >
       {children}
     </button>
@@ -158,12 +160,12 @@ function NavButton({
 
 function WorkshopPicker({ value, onChange }: { value: string; onChange: (id: string) => void }) {
   return (
-    <div className="-mx-5 flex snap-x gap-3 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0 lg:grid-cols-6">
+    <div className="-mx-5 flex snap-x gap-3 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-3 md:px-0 lg:grid-cols-4">
       <button
         onClick={() => onChange("all")}
         className={cn(
           "flex min-w-40 snap-start flex-col justify-between rounded-sm border p-4 text-left transition-colors",
-          value === "all" ? "border-ink bg-ink text-white" : "border-ink/10 bg-white/60 hover:border-ink/30",
+          value === "all" ? "border-cobalt bg-cobalt text-white" : "border-ink/10 bg-white/60 hover:border-ink/30",
         )}
       >
         <span className="text-[11px] opacity-70">Showing</span>
@@ -218,7 +220,7 @@ function WeekStrip({
             onClick={() => onPick(d)}
             className={cn(
               "flex flex-col items-center gap-1 rounded-full py-2.5 transition-colors disabled:opacity-30",
-              active ? "bg-ink text-white" : "hover:bg-cream",
+              active ? "bg-cobalt text-white" : "hover:bg-cream",
             )}
           >
             <span className={cn("text-[10px] uppercase", active ? "text-white/70" : "text-muted-foreground")}>
@@ -299,7 +301,7 @@ function DayTimeline({
         {hours.map((h) => (
           <div key={h} className="absolute inset-x-0 flex items-start gap-3" style={{ top: (h - FIRST_HOUR) * HOUR_PX }}>
             <span className="-mt-1.5 w-14 shrink-0 text-right text-[10px] text-muted-foreground">{formatHour(h)}</span>
-            <span className="h-px flex-1 bg-ink/8" />
+            <span className="h-px flex-1 bg-cobalt/8" />
           </div>
         ))}
 

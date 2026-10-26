@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/s
 import { cn } from "@/lib/utils";
 import { useCart } from "@/lib/store";
 import { CartSheet } from "./cart-sheet";
+import { Logo } from "./primitives";
 import { navLinks } from "./nav-links";
 
 export function Navbar() {
@@ -35,8 +36,8 @@ export function Navbar() {
       )}
     >
       <div className={cn("container-page flex h-16 items-center justify-between md:h-20", light ? "text-white" : "text-ink")}>
-        <Link href="/" className="font-serif text-3xl tracking-tight">
-          Clayra
+        <Link href="/" aria-label="Toma l'atelier home">
+          <Logo />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
@@ -60,7 +61,7 @@ export function Navbar() {
               aria-label="Open cart"
               className={cn(
                 "relative grid size-10 place-items-center rounded-full transition-colors",
-                light ? "hover:bg-white/15" : "hover:bg-ink/5",
+                light ? "hover:bg-white/15" : "hover:bg-cobalt/5",
               )}
             >
               <ShoppingBag className="size-[18px]" />
@@ -74,13 +75,13 @@ export function Navbar() {
           </Sheet>
 
           <Link
-            href="/shop"
+            href="/booking"
             className={cn(
               "hidden rounded-full px-5 py-2.5 text-xs font-semibold transition-colors sm:inline-flex",
-              light ? "bg-white text-ink hover:bg-cream" : "bg-ink text-white hover:bg-ink/85",
+              light ? "bg-white text-ink hover:bg-cream" : "bg-cobalt text-white hover:bg-cobalt/85",
             )}
           >
-            Shop Now
+            Book a Seat
           </Link>
 
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -88,7 +89,7 @@ export function Navbar() {
               <Menu className="size-5" />
             </SheetTrigger>
             <SheetContent side="right" className="bg-cream p-8">
-              <SheetTitle className="font-serif text-3xl font-normal">Clayra</SheetTitle>
+              <SheetTitle><Logo /></SheetTitle>
               <nav className="mt-6 flex flex-col gap-1">
                 {navLinks.map((l) => (
                   <Link
@@ -104,9 +105,9 @@ export function Navbar() {
               <Link
                 href="/booking"
                 onClick={() => setMenuOpen(false)}
-                className="mt-auto rounded-full bg-ink px-5 py-3 text-center text-sm font-medium text-white"
+                className="mt-auto rounded-full bg-cobalt px-5 py-3 text-center text-sm font-medium text-white"
               >
-                Book a class
+                Book a seat
               </Link>
             </SheetContent>
           </Sheet>

@@ -9,19 +9,17 @@ import { ProductCard } from "./product-card";
 import { FilterPills } from "./product-showcase";
 
 const categories = [
-  { id: "All", label: "All Pottery" },
-  { id: "Vases", label: "Vases" },
-  { id: "Bowls", label: "Bowls" },
+  { id: "All", label: "All Pieces" },
   { id: "Mugs", label: "Mugs" },
-  { id: "Plates", label: "Plates" },
-  { id: "Jars", label: "Jars & Planters" },
+  { id: "Plates & Dishes", label: "Plates & Dishes" },
+  { id: "Home", label: "Home" },
+  { id: "Totes & Aprons", label: "Totes & Aprons" },
 ] as const;
 
 const sorts = {
   featured: "Featured",
   "price-asc": "Price: Low to High",
   "price-desc": "Price: High to Low",
-  rating: "Top Rated",
 } as const;
 
 type Sort = keyof typeof sorts;
@@ -40,7 +38,6 @@ export function ShopGrid({ initialCategory = "All", source = products }: { initi
     );
     if (sort === "price-asc") return filtered.toSorted((a, b) => salePrice(a) - salePrice(b));
     if (sort === "price-desc") return filtered.toSorted((a, b) => salePrice(b) - salePrice(a));
-    if (sort === "rating") return filtered.toSorted((a, b) => b.rating - a.rating);
     return filtered;
   }, [source, category, sort, query]);
 
@@ -54,7 +51,7 @@ export function ShopGrid({ initialCategory = "All", source = products }: { initi
             <Input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search pottery"
+              placeholder="Search ceramics"
               className="h-9 w-44 rounded-full bg-white/70 pl-8 text-xs"
             />
           </div>

@@ -44,7 +44,7 @@ export function CartSheet({ onNavigate }: { onNavigate: () => void }) {
         <div className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
           <ShoppingBag className="size-10 text-clay" strokeWidth={1.2} />
           <p className="font-serif text-2xl">Your basket is empty</p>
-          <Link href="/shop" onClick={onNavigate} className="rounded-full bg-ink px-5 py-2.5 text-sm text-white">
+          <Link href="/shop" onClick={onNavigate} className="rounded-full bg-cobalt px-5 py-2.5 text-sm text-white">
             Browse the shop
           </Link>
         </div>
@@ -81,9 +81,9 @@ export function CartSheet({ onNavigate }: { onNavigate: () => void }) {
             <Link
               href="/cart"
               onClick={onNavigate}
-              className="mt-2 rounded-full bg-ink py-3 text-center text-sm font-medium text-white hover:bg-ink/85"
+              className="mt-2 rounded-full bg-cobalt py-3 text-center text-sm font-medium text-white hover:bg-cobalt/85"
             >
-              Checkout
+              View basket
             </Link>
           </SheetFooter>
         </>
